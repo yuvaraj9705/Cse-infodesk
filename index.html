@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CSE InfoDesk - JNTUH</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main-container">
+    <div class="form-card">
+      <h1>CSE InfoDesk <span>- JNTUH</span></h1>
+      <p class="subtitle">Submit your queries below</p>
+
+      <form id="queryForm">
+        <label for="name"><strong>Your Name</strong> </label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+        <label for="email"><strong>Your Email</strong></label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <label for="query"><strong>Your Query</strong></label>
+        <textarea id="query" name="query" placeholder="Type your query..." rows="4" required></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <div id="response" class="hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("queryForm");
+    const responseBox = document.getElementById("response");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        query: form.query.value
+      };
+
+      const res = await fetch("/submit-query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        responseBox.innerHTML = `<div class="success-message">
+          ✅ ${data.message}<br><small>Thank you! We will respond soon.</small>
+        </div>`;
+        responseBox.classList.remove("hidden");
+        form.reset();
+      } else {
+        responseBox.innerHTML = `<div class="error-message">❌ ${data.message}</div>`;
+        responseBox.classList.remove("hidden");
+      }
+    });
+  </script>
+</body>
+</html>

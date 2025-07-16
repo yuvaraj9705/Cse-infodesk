@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submitted Queries</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>All Submitted Queries</h1>
+    <ul id="queryList"></ul>
+  </div>
+
+  <script>
+    async function loadQueries() {
+      const res = await fetch("/view-queries");
+      const data = await res.json();
+
+      const list = document.getElementById("queryList");
+      list.innerHTML = "";
+
+      data.forEach((q) => {
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${q.name}</strong> (${q.email})<br><em>${q.query}</em><br><small>${q.time}</small><hr>`;
+        list.appendChild(li);
+      });
+    }
+
+    loadQueries();
+  </script>
+</body>
+</html>

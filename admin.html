@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - CSE InfoDesk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main-container">
+    <div class="form-card">
+      <h1>Answer Student Queries</h1>
+      <div id="queryList"></div>
+    </div>
+  </div>
+
+  <script>
+    async function loadQueries() {
+      const res = await fetch("/view-queries");
+      const data = await res.json();
+      const container = document.getElementById("queryList");
+
+      data.forEach((q, index) => {
+        const card = document.createElement("div");
+        card.className = "query-box";
+        card.innerHTML = `
+          <p><strong>Serial No:</strong> ${index + 1}</p>
+          <p><strong>Name:</strong> ${q.name}</p>
+          <p><strong>Email:</strong> ${q.email}</p>
+          <p><strong>Query:</strong> ${q.query}</p>
+          ${q.answer ? `<div class="answer-box"><strong>Answer:</strong><br>${q.answer}</div>` : `
+          <form onsubmit="return sendAnswer(event, ${index})">
+            <textarea placeholder="Type your answer here..." required></textarea>
+            <button type="submit">Send Answer</button>
+          </form>`}
+          <hr />
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function sendAnswer(event, index) {
+      event.preventDefault();
+      const textarea = event.target.querySelector("textarea");
+      const answer = textarea.value;
+
+      const res = await fetch("/submit-answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ index, answer })
+      });
+
+      const result = await res.json();
+      alert(result.message);
+      location.reload();
+    }
+
+    loadQueries();
+  </script>
+</body>
+</html>

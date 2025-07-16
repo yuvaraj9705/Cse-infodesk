@@ -1,0 +1,129 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.main-container {
+  padding: 20px;
+  width: 100%;
+}
+
+.form-card {
+  background-color: #ffffff;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form-card h1 {
+  margin-bottom: 5px;
+  color: #007BFF;
+  font-size: 28px;
+}
+
+.form-card h1 span {
+  font-weight: normal;
+  font-size: 20px;
+  color: #444;
+}
+
+.subtitle {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+label {
+  margin-top: 15px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+input, textarea {
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.success-message {
+  background-color: #e8f6e8;
+  color: #2f6627;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #4CAF50;
+  text-align: left;
+}
+
+.error-message {
+  background-color: #fdecea;
+  color: #a94442;
+  padding: 14px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #f44336;
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .form-card {
+    padding: 25px 20px;
+  }
+}
+.query-box {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+}
+
+.answer-box {
+  background-color: #e0f0ff;
+  border-left: 4px solid #007bff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
